@@ -59,18 +59,20 @@ What it sets up
 * Heroku Toolbelt for interacting with the Heroku API
 * Hub gem for interacting with the GitHub API
 * Homebrew for managing operating system libraries (OS X only)
-* ImageMagick for cropping and resizing images
-* Postgres for storing relational data
-* Postgres gem for talking to Postgres from Ruby
-* Qt for headless JavaScript testing via Capybara Webkit
-* Rails gem for writing web applications
+* ~~ImageMagick for cropping and resizing images~~ (removed by uni380)
+* ~~Postgres for storing relational data~~ (removed by uni380)
+* ~~Postgres gem for talking to Postgres from Ruby~~ (removed by uni380)
+* ~~Qt for headless JavaScript testing via Capybara Webkit~~ (removed by uni380)
+* ~~Rails gem for writing web applications~~ (removed by uni380)
+* Sinatra gem for writing web applications (added by uni380)
 * Rbenv for managing versions of the Ruby programming language
-* Redis for storing key-value data
+* ~~Redis for storing key-value data~~ (removed by uni380)
 * Ruby Build for installing Rubies
 * Ruby stable for writing general-purpose code
 * The Silver Searcher for finding things in files
 * Tmux for saving project state and switching between projects
 * Watch for periodically executing a program and displaying the output
+* Pry as interactive Ruby console and debugger (added by uni380)
 
 It should take less than 15 minutes to install (depends on your machine).
 

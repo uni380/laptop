@@ -37,13 +37,6 @@ fi
 
 ### end mac-components/homebrew
 
-fancy_echo "Installing Postgres, a good open source relational database ..."
-  brew install postgres --no-python
-  initdb /usr/local/var/postgres -E utf8
-
-fancy_echo "Installing Redis, a good key-value database ..."
-  brew install redis
-
 fancy_echo "Installing The Silver Searcher (better than ack or grep) to search the contents of files ..."
   brew install the_silver_searcher
 
@@ -58,12 +51,6 @@ fancy_echo "Installing tmux, to save project state and switch between projects .
 
 fancy_echo "Installing reattach-to-user-namespace, for copy-paste and RubyMotion compatibility with tmux ..."
   brew install reattach-to-user-namespace
-
-fancy_echo "Installing ImageMagick, to crop and resize images ..."
-  brew install imagemagick
-
-fancy_echo "Installing QT, used by Capybara Webkit for headless Javascript integration testing ..."
-  brew install qt
 
 fancy_echo "Installing watch, to execute a program periodically and show the output ..."
   brew install watch
@@ -108,8 +95,8 @@ fancy_echo "Setting Ruby 2.0.0-p247 as global default Ruby ..."
 fancy_echo "Updating to latest Rubygems version ..."
   gem update --system
 
-fancy_echo "Installing critical Ruby gems for Rails development ..."
-  gem install bundler pg rails unicorn --no-document
+fancy_echo "Installing critical Ruby gems for Sinatra development ..."
+  gem install bundler pry jazz_hands sinatra unicorn --no-document
 
 fancy_echo "Installing GitHub CLI client ..."
   curl http://hub.github.com/standalone -sLo ~/.bin/hub

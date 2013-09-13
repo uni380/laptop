@@ -8,8 +8,8 @@ fancy_echo "Setting Ruby 2.0.0-p247 as global default Ruby ..."
 fancy_echo "Updating to latest Rubygems version ..."
   gem update --system
 
-fancy_echo "Installing critical Ruby gems for Rails development ..."
-  gem install bundler pg rails unicorn --no-document
+fancy_echo "Installing critical Ruby gems for Sinatra development ..."
+  gem install bundler pry jazz_hands sinatra unicorn --no-document
 
 fancy_echo "Installing GitHub CLI client ..."
   curl http://hub.github.com/standalone -sLo ~/.bin/hub

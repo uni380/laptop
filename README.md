@@ -74,6 +74,7 @@ What it sets up
 * Watch for periodically executing a program and displaying the output
 * Pry as interactive Ruby console and debugger (added by uni380)
 * Homesick gem for managing dotfiles (added by uni380)
+* Prezto as ZSH configuration framework (added by uni380)
 
 It should take less than 15 minutes to install (depends on your machine).
 

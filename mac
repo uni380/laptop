@@ -107,7 +107,7 @@ fancy_echo "Upgrading and linking OpenSSL ..."
 export CC=gcc-4.2
 ### end mac-components/compiler-and-libraries
 
-RUBY_VERSION="2.0.0"
+RUBY_VERSION="2.0.0-p451"
 
 fancy_echo "Installing Ruby $RUBY_VERSION ..."
   rbenv install $RUBY_VERSION

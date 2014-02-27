@@ -1,18 +1,17 @@
-fancy_echo "Installing Ruby 2.0.0-p247 ..."
-  rbenv install 2.0.0-p247
+RUBY_VERSION="2.0.0"
 
-fancy_echo "Setting Ruby 2.0.0-p247 as global default Ruby ..."
-  rbenv global 2.0.0-p247
+fancy_echo "Installing Ruby $RUBY_VERSION ..."
+  rbenv install $RUBY_VERSION
+
+fancy_echo "Setting $RUBY_VERSION as global default Ruby ..."
+  rbenv global $RUBY_VERSION
   rbenv rehash
 
 fancy_echo "Updating to latest Rubygems version ..."
   gem update --system
 
-fancy_echo "Installing critical Ruby gems for Sinatra development ..."
-  gem install bundler jazz_hands sinatra unicorn --no-document
-
-fancy_echo "Installing Homesick dotfiles manager ..."
-  gem install homesick --no-document
+fancy_echo "Installing Bundler to install project-specific Ruby gems ..."
+  gem install bundler --no-document
 
 fancy_echo "Installing GitHub CLI client ..."
   curl http://hub.github.com/standalone -sLo ~/.bin/hub

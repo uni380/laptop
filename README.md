@@ -8,31 +8,28 @@ Requirements
 
 ### Mac OS X
 
-1) Install a C compiler.
+Install a C compiler:
 
-Use [OS X GCC Installer](https://github.com/kennethreitz/osx-gcc-installer/) for
-Snow Leopard (OS X 10.6).
+For Snow Leopard (10.6): use [OS X GCC
+Installer](https://github.com/kennethreitz/osx-gcc-installer/).
 
-Use [Command Line Tools for XCode](https://developer.apple.com/downloads/index.action)
-for Lion (OS X 10.7) or Mountain Lion (OS X 10.8).
+For Lion (10.7) or Mountain Lion (10.8): use [Command Line Tools for
+XCode](https://developer.apple.com/downloads/index.action).
 
-2) Set zsh as your login shell:
-
-    chsh -s /bin/zsh
+For Mavericks (10.9): run `sudo xcodebuild -license` and follow the instructions
+to accept the XCode agreement.  Then run `xcode-select --install` in your
+terminal and then click "Install".
 
 ### Linux
 
 We support:
 
+* [13.10: Saucy Salamander](https://wiki.ubuntu.com/SaucySalamander/ReleaseNotes),
 * [13.04: Raring Ringtail](https://wiki.ubuntu.com/RaringRingtail/ReleaseNotes),
 * [12.10: Quantal Quetzal](https://wiki.ubuntu.com/QuantalQuetzal/ReleaseNotes), and
 * [12.04 LTS: Precise Pangolin](https://wiki.ubuntu.com/PrecisePangolin/ReleaseNotes),
 * Debian stable (currently [wheezy](http://www.debian.org/releases/stable/)).
 * Debian testing (currently [jessie](http://www.debian.org/releases/testing/)).
-
-1) Install zsh and set it as your login shell:
-
-    bash <(wget -qO- https://raw.github.com/uni380/laptop/master/linux-prerequisites)
 
 Install
 -------
@@ -41,17 +38,18 @@ Install
 
 Read, then run the script:
 
-    zsh <(curl -s https://raw.github.com/uni380/laptop/master/mac)
+    bash <(curl -s https://raw.github.com/thoughtbot/laptop/master/mac)
 
 ### Linux
 
 Read, then run the script:
 
-    zsh <(wget -qO- https://raw.github.com/uni380/laptop/master/linux)
+    bash <(wget -qO- https://raw.github.com/thoughtbot/laptop/master/linux)
 
 What it sets up
 ---------------
 
+* Zsh as your shell
 * Bundler gem for managing Ruby libraries
 * Exuberant Ctags for indexing files for vim tab completion
 * Foreman gem for serving Rails apps locally
@@ -72,8 +70,7 @@ What it sets up
 * The Silver Searcher for finding things in files
 * Tmux for saving project state and switching between projects
 * Watch for periodically executing a program and displaying the output
-* Pry as interactive Ruby console and debugger (added by uni380)
-* Homesick gem for managing dotfiles (added by uni380)
+* Pry (jazz_hands) as interactive Ruby console and debugger (added by uni380)
 * Prezto as ZSH configuration framework (added by uni380)
 
 It should take less than 15 minutes to install (depends on your machine).
@@ -96,5 +93,5 @@ Please see [CONTRIBUTING.md](https://github.com/thoughtbot/laptop/blob/master/CO
 License
 -------
 
-Laptop is © 2011-2013 thoughtbot, inc. It is free software, and may be
+Laptop is © 2011-2014 thoughtbot, inc. It is free software, and may be
 redistributed under the terms specified in the LICENSE file.

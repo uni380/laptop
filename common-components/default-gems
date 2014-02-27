@@ -1,0 +1,5 @@
+fancy_echo "Installing Sinatra ..."
+  gem install sinatra --no-document
+
+fancy_echo "Installing Pry and related gems for Ruby debugging ..."
+  gem install jazz_hands --no-document

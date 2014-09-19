@@ -1,17 +1,17 @@
 fancy_echo "Installing The Silver Searcher (better than ack or grep) to search the contents of files ..."
-  brew install the_silver_searcher
+  brew_install_or_upgrade 'the_silver_searcher'
 
 fancy_echo "Installing vim from Homebrew to get the latest version ..."
-  brew install vim
+  brew_install_or_upgrade 'vim'
 
 fancy_echo "Installing ctags, to index files for vim tab completion of methods, classes, variables ..."
-  brew install ctags
+  brew_install_or_upgrade 'ctags'
 
 fancy_echo "Installing tmux, to save project state and switch between projects ..."
-  brew install tmux
+  brew_install_or_upgrade 'tmux'
 
 fancy_echo "Installing reattach-to-user-namespace, for copy-paste and RubyMotion compatibility with tmux ..."
-  brew install reattach-to-user-namespace
+  brew_install_or_upgrade 'reattach-to-user-namespace'
 
 fancy_echo "Installing watch, to execute a program periodically and show the output ..."
-  brew install watch
+  brew_install_or_upgrade 'watch'

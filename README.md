@@ -8,25 +8,18 @@ Requirements
 
 ### Mac OS X
 
-Install a C compiler:
+We support:
 
-For Snow Leopard (10.6): use [OS X GCC
-Installer](https://github.com/kennethreitz/osx-gcc-installer/).
+* [10.9: Mavericks](https://itunes.apple.com/us/app/os-x-mavericks/id675248567)
 
-For Lion (10.7) or Mountain Lion (10.8): use [Command Line Tools for
-XCode](https://developer.apple.com/downloads/index.action).
-
-For Mavericks (10.9): run `sudo xcodebuild -license` and follow the instructions
-to accept the XCode agreement.  Then run `xcode-select --install` in your
-terminal and then click "Install".
+Older versions may work but aren't regularly tested. Bug reports for older
+versions are welcome.
 
 ### Linux
 
 We support:
 
-* [13.10: Saucy Salamander](https://wiki.ubuntu.com/SaucySalamander/ReleaseNotes),
-* [13.04: Raring Ringtail](https://wiki.ubuntu.com/RaringRingtail/ReleaseNotes),
-* [12.10: Quantal Quetzal](https://wiki.ubuntu.com/QuantalQuetzal/ReleaseNotes), and
+* [14.04: Trusty Tahr](https://wiki.ubuntu.com/TrustyTahr/ReleaseNotes),
 * [12.04 LTS: Precise Pangolin](https://wiki.ubuntu.com/PrecisePangolin/ReleaseNotes),
 * Debian stable (currently [wheezy](http://www.debian.org/releases/stable/)).
 * Debian testing (currently [jessie](http://www.debian.org/releases/testing/)).
@@ -38,42 +31,126 @@ Install
 
 Read, then run the script:
 
-    bash <(curl -s https://raw.github.com/uni380/laptop/master/mac)
+    bash <(curl -s https://raw.githubusercontent.com/uni380/laptop/master/mac) 2>&1 | tee ~/laptop.log
 
 ### Linux
 
 Read, then run the script:
 
-    bash <(wget -qO- https://raw.github.com/uni380/laptop/master/linux)
+    bash <(wget -qO- https://raw.githubusercontent.com/uni380/laptop/master/linux) 2>&1 | tee ~/laptop.log
+
+Debugging
+---------
+
+Your last Laptop run will be saved to `~/laptop.log`. Read through it to see if
+you can debug the issue yourself. If not, copy the lines where the script
+failed into a [new GitHub
+Issue](https://github.com/thoughtbot/laptop/issues/new) for us. Or, attach the
+whole log file as an attachment.
 
 What it sets up
 ---------------
 
-* Zsh as your shell
-* Bundler gem for managing Ruby libraries
-* Exuberant Ctags for indexing files for vim tab completion
-* Foreman gem for serving Rails apps locally
-* Heroku Config plugin for local `ENV` variables
-* Heroku Toolbelt for interacting with the Heroku API
-* Hub gem for interacting with the GitHub API
-* Homebrew for managing operating system libraries (OS X only)
-* ~~ImageMagick for cropping and resizing images~~ (removed by uni380)
-* ~~Postgres for storing relational data~~ (removed by uni380)
-* ~~Postgres gem for talking to Postgres from Ruby~~ (removed by uni380)
-* ~~Qt for headless JavaScript testing via Capybara Webkit~~ (removed by uni380)
-* ~~Rails gem for writing web applications~~ (removed by uni380)
-* Sinatra gem for writing web applications (added by uni380)
-* Rbenv for managing versions of the Ruby programming language
-* ~~Redis for storing key-value data~~ (removed by uni380)
-* Ruby Build for installing Rubies
-* Ruby stable for writing general-purpose code
-* The Silver Searcher for finding things in files
-* Tmux for saving project state and switching between projects
-* Watch for periodically executing a program and displaying the output
-* Pry (jazz_hands) as interactive Ruby console and debugger (added by uni380)
-* Prezto as ZSH configuration framework (added by uni380)
+* [Bundler] for managing Ruby libraries
+* [Exuberant Ctags] for indexing files for vim tab completion
+* [Foreman] for serving Rails apps locally
+* [Heroku Config] for local `ENV` variables
+* [Heroku Toolbelt] for interacting with the Heroku API
+* [Hub] for interacting with the GitHub API
+* [Homebrew] for managing operating system libraries (OS X only)
+* ~~[ImageMagick] for cropping and resizing images~~ (removed by uni380)
+* ~~[Node.js] and [NPM], for running apps and installing JavaScript packages~~ (removed by uni380)
+* ~~[NVM] for managing versions of Node.js~~ (removed by uni380)
+* ~~[Parity] for development, staging, and production parity~~ (removed by uni380)
+* [Postgres] for storing relational data
+* [Qt] for headless JavaScript testing via Capybara Webkit
+* ~~[Rails] gem for writing web applications~~ (removed by uni380)
+* [Sinatra] gem for writing web applications (added by uni380)
+* [Rbenv] for managing versions of Ruby
+* ~~[Redis] for storing key-value data~~ (removed by uni380)
+* [Ruby Build] for installing Rubies
+* [Ruby] stable for writing general-purpose code
+* [The Silver Searcher] for finding things in files
+* [Tmux] for saving project state and switching between projects
+* [Watch] for periodically executing a program and displaying the output
+* [Pry] ([jazz_hands]) as interactive Ruby console and debugger (added by uni380)
+* [Zsh] as your shell
+
+[Bundler]: http://bundler.io/
+[Exuberant Ctags]: http://ctags.sourceforge.net/
+[Foreman]: https://github.com/ddollar/foreman
+[Heroku Config]: https://github.com/ddollar/heroku-config
+[Heroku Toolbelt]: https://toolbelt.heroku.com/
+[Hub]: https://hub.github.com/
+[Homebrew]: http://brew.sh/
+[ImageMagick]: http://www.imagemagick.org/
+[Node.js]: http://nodejs.org/
+[NPM]: https://www.npmjs.org/
+[NVM]: https://github.com/creationix/nvm
+[Parity]: https://github.com/croaky/parity
+[Postgres]: http://www.postgresql.org/
+[Qt]: http://qt-project.org/
+[Rails]: http://rubyonrails.org/
+[Sinatra]: http://sinatrarb.com/
+[Rbenv]: https://github.com/sstephenson/rbenv
+[Redis]: http://redis.io/
+[Ruby Build]: https://github.com/sstephenson/ruby-build
+[Ruby]: https://www.ruby-lang.org/en/
+[The Silver Searcher]: https://github.com/ggreer/the_silver_searcher
+[Tmux]: http://tmux.sourceforge.net/
+[Watch]: http://linux.die.net/man/1/watch
+[Pry]: http://pryrepl.org/
+[jazz_hands]: https://github.com/nixme/jazz_hands/
+[Zsh]: http://www.zsh.org/
 
 It should take less than 15 minutes to install (depends on your machine).
+
+Laptop can be run multiple times on the same machine safely. It will upgrade
+already installed packages and install and activate a new version of ruby (if
+one is available).
+
+Make your own customizations
+----------------------------
+
+Put your customizations in `~/.laptop.local`. For example, your
+`~/.laptop.local` might look like this:
+
+    #!/bin/sh
+
+    brew tap caskroom/cask
+    brew install brew-cask
+
+    brew cask install dropbox
+    brew cask install google-chrome
+    brew cask install rdio
+
+You should write your customizations such that they can be run safely more than
+once. See the `mac` and `linux` scripts for examples.
+
+Laptop'ed Linux Vagrant boxes
+-----------------------------
+
+We now publish [Vagrant](http://vagrantup.com) boxes with the Laptop script
+applied for every supported Linux distro.
+
+Create a Vagrantfile:
+
+    vagrant init thoughtbot/ubuntu-14-04-server-with-laptop
+
+In the same directory as your Vagrantfile:
+
+    vagrant up
+    vagrant ssh
+
+Laptop'ed vagrantcloud boxes currently available:
+
+* `thoughtbot/debian-wheezy-64-with-laptop`
+* `thoughtbot/debian-jessie-64-with-laptop`
+* `thoughtbot/ubuntu-14-04-server-with-laptop`
+* `thoughtbot/ubuntu-12-04-server-with-laptop`
+
+See our [vagrantcloud profile](https://vagrantcloud.com/thoughtbot). You must
+have Vagrant >= 1.5.0 to use vagrantcloud images directly.
 
 Credits
 -------

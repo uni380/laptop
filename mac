@@ -22,7 +22,7 @@ if [ ! -f "$HOME/.zshrc" ]; then
 fi
 
 if [[ ":$PATH:" != *":$HOME/.bin:"* ]]; then
-  echo 'export PATH="$HOME/.bin:$PATH"' >> ~/.zshrc
+  printf 'export PATH="$HOME/.bin:$PATH"\n' >> ~/.zshrc
   export PATH="$HOME/.bin:$PATH"
 fi
 ### end common-components/check-home-bin
@@ -36,84 +36,123 @@ fancy_echo "Changing your shell to zsh ..."
   chsh -s $(which zsh)
 ### end common-components/zsh
 
+brew_install_or_upgrade() {
+  if brew_is_installed "$1"; then
+    if brew_is_upgradable "$1"; then
+      brew upgrade "$@"
+    fi
+  else
+    brew install "$@"
+  fi
+}
+
+brew_is_installed() {
+  local NAME=$(brew_expand_alias "$1")
+
+  brew list -1 | grep -Fqx "$NAME"
+}
+
+brew_is_upgradable() {
+  local NAME=$(brew_expand_alias "$1")
+
+  brew outdated --quiet "$NAME" >/dev/null
+  [[ $? -ne 0 ]]
+}
+
+brew_expand_alias() {
+  brew info "$1" 2>/dev/null | head -1 | awk '{gsub(/:/, ""); print $1}'
+}
+
+brew_launchctl_restart() {
+  local NAME=$(brew_expand_alias "$1")
+  local DOMAIN="homebrew.mxcl.$NAME"
+  local PLIST="$DOMAIN.plist"
+
+  mkdir -p ~/Library/LaunchAgents
+  ln -sfv /usr/local/opt/$NAME/$PLIST ~/Library/LaunchAgents
+
+  if launchctl list | grep -q $DOMAIN; then
+    launchctl unload ~/Library/LaunchAgents/$PLIST >/dev/null
+  fi
+  launchctl load ~/Library/LaunchAgents/$PLIST >/dev/null
+}
+### end mac-components/mac-functions
+
 if [[ -f /etc/zshenv ]]; then
   fancy_echo "Fixing OSX zsh environment bug ..."
     sudo mv /etc/{zshenv,zshrc}
 fi
 ### end mac-components/zsh-fix
 
-if ! which brew &>/dev/null; then
+if ! command -v brew &>/dev/null; then
   fancy_echo "Installing Homebrew, a good OS X package manager ..."
-    ruby <(curl -fsS https://raw.github.com/Homebrew/homebrew/go/install)
-    brew update
+    ruby <(curl -fsS https://raw.githubusercontent.com/Homebrew/homebrew/go/install)
 
   if ! grep -qs "recommended by brew doctor" ~/.zshrc; then
     fancy_echo "Put Homebrew location earlier in PATH ..."
-      echo "\n# recommended by brew doctor" >> ~/.zshrc
-      echo "export PATH=\"/usr/local/bin:\$PATH\"\n" >> ~/.zshrc
+      printf '\n# recommended by brew doctor\n' >> ~/.zshrc
+      printf 'export PATH="/usr/local/bin:$PATH"\n' >> ~/.zshrc
       export PATH="/usr/local/bin:$PATH"
   fi
 else
   fancy_echo "Homebrew already installed. Skipping ..."
 fi
+
+fancy_echo "Updating Homebrew formulas ..."
+brew update
 ### end mac-components/homebrew
 
 fancy_echo "Installing The Silver Searcher (better than ack or grep) to search the contents of files ..."
-  brew install the_silver_searcher
+  brew_install_or_upgrade 'the_silver_searcher'
 
 fancy_echo "Installing vim from Homebrew to get the latest version ..."
-  brew install vim
+  brew_install_or_upgrade 'vim'
 
 fancy_echo "Installing ctags, to index files for vim tab completion of methods, classes, variables ..."
-  brew install ctags
+  brew_install_or_upgrade 'ctags'
 
 fancy_echo "Installing tmux, to save project state and switch between projects ..."
-  brew install tmux
+  brew_install_or_upgrade 'tmux'
 
 fancy_echo "Installing reattach-to-user-namespace, for copy-paste and RubyMotion compatibility with tmux ..."
-  brew install reattach-to-user-namespace
+  brew_install_or_upgrade 'reattach-to-user-namespace'
 
 fancy_echo "Installing watch, to execute a program periodically and show the output ..."
-  brew install watch
+  brew_install_or_upgrade 'watch'
 ### end mac-components/packages
 
 fancy_echo "Installing rbenv, to change Ruby versions ..."
-  brew install rbenv
+  brew_install_or_upgrade 'rbenv'
 
   if ! grep -qs "rbenv init" ~/.zshrc; then
-    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
-    echo 'eval "$(rbenv init - --no-rehash)"' >> ~/.zshrc
+    printf 'export PATH="$HOME/.rbenv/bin:$PATH"\n' >> ~/.zshrc
+    printf 'eval "$(rbenv init - zsh --no-rehash)"\n' >> ~/.zshrc
 
     fancy_echo "Enable shims and autocompletion ..."
-      eval "$(rbenv init -)"
+      eval "$(rbenv init - zsh)"
   fi
 
   export PATH="$HOME/.rbenv/bin:$PATH"
 
 fancy_echo "Installing rbenv-gem-rehash so the shell automatically picks up binaries after installing gems with binaries..."
-  brew install rbenv-gem-rehash
+  brew_install_or_upgrade 'rbenv-gem-rehash'
 
 fancy_echo "Installing ruby-build, to install Rubies ..."
-  brew install ruby-build
+  brew_install_or_upgrade 'ruby-build'
 ### end mac-components/rbenv
 
-fancy_echo "Installing GNU Compiler Collection, a necessary prerequisite to installing Ruby ..."
-  brew tap homebrew/dupes
-  brew install apple-gcc42
-
 fancy_echo "Upgrading and linking OpenSSL ..."
-  brew install openssl
-
-export CC=gcc-4.2
+  brew_install_or_upgrade 'openssl'
+  brew unlink openssl && brew link openssl --force
 ### end mac-components/compiler-and-libraries
 
-RUBY_VERSION="2.0.0-p451"
+ruby_version="2.0.0-p451"
 
-fancy_echo "Installing Ruby $RUBY_VERSION ..."
-  rbenv install $RUBY_VERSION
+fancy_echo "Installing Ruby $ruby_version ..."
+  rbenv install -s "$ruby_version"
 
-fancy_echo "Setting $RUBY_VERSION as global default Ruby ..."
-  rbenv global $RUBY_VERSION
+fancy_echo "Setting $ruby_version as global default Ruby ..."
+  rbenv global "$ruby_version"
   rbenv rehash
 
 fancy_echo "Updating to latest Rubygems version ..."
@@ -121,10 +160,6 @@ fancy_echo "Updating to latest Rubygems version ..."
 
 fancy_echo "Installing Bundler to install project-specific Ruby gems ..."
   gem install bundler --no-document
-
-fancy_echo "Installing GitHub CLI client ..."
-  curl http://hub.github.com/standalone -sLo ~/.bin/hub
-  chmod +x ~/.bin/hub
 ### end common-components/ruby-environment
 
 fancy_echo "Configuring Bundler for faster, parallel gem installation ..."
@@ -140,9 +175,23 @@ fancy_echo "Installing Pry and related gems for Ruby debugging ..."
 ### end common-components/default-gems
 
 fancy_echo "Installing Heroku CLI client ..."
-  brew install heroku-toolbelt
+  brew_install_or_upgrade 'heroku-toolbelt'
 
 fancy_echo "Installing the heroku-config plugin to pull config variables locally to be used as ENV variables ..."
   heroku plugins:install git://github.com/ddollar/heroku-config.git
+
+fancy_echo "Installing foreman ..."
+  curl -sLo /tmp/foreman.pkg http://assets.foreman.io/foreman/foreman.pkg && \
+  sudo installer -pkg /tmp/foreman.pkg -tgt /
 ### end mac-components/heroku
+
+fancy_echo "Installing GitHub CLI client ..."
+  brew_install_or_upgrade 'hub'
+### end mac-components/github
+
+fancy_echo "Installing your personal additions from ~/.laptop.local ..."
+  if [[ -f ~/.laptop.local ]]; then
+    source ~/.laptop.local
+  fi
+### end common-components/personal-additions
 

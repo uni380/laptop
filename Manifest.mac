@@ -4,6 +4,7 @@ common-components/exit-trap
 common-components/check-home-bin
 common-components/shared-functions
 common-components/zsh
+mac-components/mac-functions
 mac-components/zsh-fix
 mac-components/homebrew
 mac-components/packages
@@ -13,3 +14,5 @@ common-components/ruby-environment
 mac-components/bundler
 common-components/default-gems
 mac-components/heroku
+mac-components/github
+common-components/personal-additions
